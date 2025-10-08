@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border 0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    .error-msg {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .invalid {
+      border-color: #e74c3c !important;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+      margin: 30px auto 0;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .required {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Registration Form</h1>
+    <form id="myForm">
+      <!--text input-->
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name">
+      </div>
+      <!--email input-->
+      <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email">
+      </div>
+      <!--Radio input-->
+      <div class="form-group">
+        <label>Gender <span class="required">*</span></label>
+        <div>
+          <input type="radio" id="male" name="gender" value="Male">
+          <label for="male">Male</label>
+        </div>
+        <div>
+          <input type="radio" id="female" name="gender" value="Female">
+          <label for="female">Female</label>
+        </div>
+        <div>
+          <input type="radio" id="other" name="gender" value="Other">
+          <label for="other">Other</label>
+        </div>
+      </div>
+      <!--Date Input-->
+      <div class="form-group">
+        <label for="dob">Date of Birth <span class="required">*</span></label>
+        <input type="date" id="dob" name="dob">
+      </div>
+      <!--select dropdown-->
+      <div class="form-group">
+        <label for="country">Country <span class="required">*</span></label>
+        <select id="country" name="country">
+          <option value="">Select your country</option>
+          <option value="USA">United States</option>
+          <option value="Canada">Canada</option>
+          <option value="UK">United Kingdom</option>
+          <option value="Australia">Australia</option>
+        </select>
+      </div>
+      <!--text area-->
+      <div class="form-group">
+        <label for="address">Address Information</label>
+        <textarea id="address" name="address" placeholder="Enter your address"></textarea>
+      </div>
+      <button type="submit">Submit Form</button>
+    </form>
+  </div>
+
+
+
+
+  <script>
+    const form = document.getElementById("myForm");
+
+    // Utility: show error
+    function showError(input, message) {
+      clearError(input); // remove old error if any
+      input.classList.add("invalid");
+
+      const error = document.createElement("div");
+      error.classList.add("error-msg");
+      error.textContent = message;
+
+      input.parentElement.appendChild(error);
+    }
+
+    // Utility: clear error
+    function clearError(input) {
+      input.classList.remove("invalid");
+      const oldError = input.parentElement.querySelector(".error-msg");
+      if (oldError) oldError.remove();
+    }
+
+    // Validate fields in order
+    function validateForm() {
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const dob = document.getElementById("dob");
+      const country = document.getElementById("country");
+      const address = document.getElementById("address");
+
+      if (name.value.trim() == "") {
+        showError(name, "Name is required");
+        return false;
+      }
+
+      if (email.value.trim() == "") {
+        showError(email, "Email is required");
+        return false;
+      }
+
+      if (!gender) {
+        const genderGroup = document.querySelector('input[name="gender"]').parentElement.parentElement;
+        let oldError = genderGroup.querySelector(".error-msg");
+        if (!oldError) {
+          const error = document.createElement("div");
+          error.classList.add("error-msg");
+          error.textContent = "Gender is required";
+          genderGroup.appendChild(error);
+        }
+        return false;
+      }
+
+      if (dob.value.trim() === "") {
+        showError(dob, "Date of Birth is required");
+        return false;
+      }
+
+      if (country.value.trim() === "") {
+        showError(country, "Country is required");
+        return false;
+      }
+
+      return {
+        name: name.value.trim(),
+        email: email.value.trim(),
+        gender: gender.value,
+        dob: dob.value,
+        country: country.value,
+        address: address.value.trim()
+      };
+    }
+
+    // On typing, remove error
+    form.querySelectorAll("input, select, textarea").forEach(input => {
+      input.addEventListener("input", () => clearError(input));
+      input.addEventListener("change", () => clearError(input));
+    });
+
+    // On submit
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const formData = validateForm();
+
+      if (formData) {
+        alert(`
+        Name: ${formData.name}
+        Email: ${formData.email}
+        Gender: ${formData.gender}
+        Date of Birth: ${formData.dob}
+        Country: ${formData.country}
+        Address: ${formData.address}
+        `);
+        form.reset();
+      }
+    });
+  </script>
+</body>
+
+</html>

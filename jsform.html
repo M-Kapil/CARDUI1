@@ -1,237 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registration Form</title>
-<style>
-  /* 🌟 Global Reset & Base */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
 
-  body {
-    background: linear-gradient(135deg, #74b9ff, #a29bfe);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #2c3e50;
-    overflow-x: hidden;
-  }
-
-  /* 🌐 Container */
-  .container {
-    width: 95%;
-    max-width: 750px;
-    background: #ffffff;
-    padding: 40px 50px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    animation: fadeInUp 0.8s ease forwards;
-  }
-
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
+  <style>
+    /* 🌟 Global Reset & Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+
+    body {
+      background: linear-gradient(135deg, #74b9ff, #a29bfe);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2c3e50;
+      overflow-x: hidden;
+      position: relative;
     }
-  }
 
-  /* 🏷️ Heading */
-  h1 {
-    text-align: center;
-    margin-bottom: 35px;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #2d3436;
-    letter-spacing: 1px;
-    position: relative;
-  }
+    /* 🌗 Dark Mode Base */
+    body.dark {
+      background: linear-gradient(135deg, #2d3436, #000);
+      color: #ecf0f1;
+    }
 
-  h1::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #0984e3, #6c5ce7);
-    margin: 10px auto 0;
-    border-radius: 2px;
-  }
-
-  /* 🧩 Form Elements */
-  .form-group {
-    margin-bottom: 25px;
-    position: relative;
-    transition: transform 0.2s ease;
-  }
-
-  .form-group:hover {
-    transform: translateY(-2px);
-  }
-
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #2d3436;
-    letter-spacing: 0.3px;
-  }
-
-  .required {
-    color: #e74c3c;
-    margin-left: 2px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 16px;
-    background: #f9f9f9;
-    transition: all 0.3s ease;
-  }
-
-  input:focus,
-  select:focus,
-  textarea:focus {
-    border-color: #6c5ce7;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(108, 92, 231, 0.3);
-    outline: none;
-  }
-
-  .invalid {
-    border-color: #e74c3c !important;
-    background: #fff5f5;
-  }
-
-  .error-msg {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: 6px;
-    font-weight: 500;
-  }
-
-  /* ✨ Button Styling */
-  button {
-    background: linear-gradient(90deg, #0984e3, #6c5ce7);
-    color: #fff;
-    border: none;
-    padding: 14px 28px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 17px;
-    font-weight: 600;
-    display: block;
-    width: 100%;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
-  }
-
-  button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(108, 92, 231, 0.4);
-    background: linear-gradient(90deg, #6c5ce7, #0984e3);
-  }
-
-  button:active {
-    transform: scale(0.98);
-  }
-
-  /* 📱 Responsive Design */
-  @media (max-width: 600px) {
+    /* 🌐 Container */
     .container {
-      padding: 25px 20px;
-      border-radius: 12px;
+      width: 95%;
+      max-width: 750px;
+      background: #ffffff;
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      animation: fadeInUp 0.8s ease forwards;
     }
 
+    body.dark .container {
+      background: #1e272e;
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.08);
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 🏷️ Heading */
     h1 {
-      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 35px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2d3436;
+      letter-spacing: 1px;
+      position: relative;
     }
 
-    input,
+    body.dark h1 {
+      color: #ecf0f1;
+    }
+
+    h1::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #0984e3, #6c5ce7);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* 🧩 Form Elements */
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .form-group:hover {
+      transform: translateY(-2px);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2d3436;
+      letter-spacing: 0.3px;
+    }
+
+    body.dark label {
+      color: #ecf0f1;
+    }
+
+    .required {
+      color: #e74c3c;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
     select,
     textarea {
-      font-size: 15px;
-      padding: 12px;
-    }
-
-    button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
       font-size: 16px;
-      padding: 12px;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
     }
-  }
 
-  /* 🌈 Floating Glow Animation for Aesthetic */
-  @keyframes floating-glow {
-    0%, 100% {
-      box-shadow: 0 0 10px rgba(108, 92, 231, 0.3),
-                  0 0 20px rgba(9, 132, 227, 0.3);
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #6c5ce7;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(108, 92, 231, 0.3);
+      outline: none;
     }
-    50% {
-      box-shadow: 0 0 20px rgba(108, 92, 231, 0.5),
-                  0 0 30px rgba(9, 132, 227, 0.5);
+
+    body.dark input,
+    body.dark select,
+    body.dark textarea {
+      background: #2f3640;
+      color: #f5f6fa;
+      border-color: #555;
     }
-  }
 
-  button:hover {
-    animation: floating-glow 1.5s infinite alternate;
-  }
-</style>
+    body.dark input:focus,
+    body.dark select:focus,
+    body.dark textarea:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 8px rgba(108, 92, 231, 0.4);
+    }
 
+    .invalid {
+      border-color: #e74c3c !important;
+      background: #fff5f5;
+    }
+
+    .error-msg {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ✨ Button Styling */
+    button {
+      background: linear-gradient(90deg, #0984e3, #6c5ce7);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 600;
+      display: block;
+      width: 100%;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(108, 92, 231, 0.4);
+      background: linear-gradient(90deg, #6c5ce7, #0984e3);
+    }
+
+    /* 📱 Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      input,
+      select,
+      textarea {
+        font-size: 15px;
+        padding: 12px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 12px;
+      }
+    }
+
+    /* 🌙 Dark Mode Toggle Switch */
+    .toggle-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-container label {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 26px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #6c5ce7;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+  </style>
 </head>
 
 <body>
+  <!-- 🌙 Dark Mode Toggle -->
+  <div class="toggle-container">
+    <label for="darkMode">🌙</label>
+    <label class="switch">
+      <input type="checkbox" id="darkMode" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
   <div class="container">
     <h1>Registration Form</h1>
     <form id="myForm">
-      <!--text input-->
       <div class="form-group">
         <label for="name">Full Name <span class="required">*</span></label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" />
       </div>
-      <!--email input-->
+
       <div class="form-group">
         <label for="email">Email <span class="required">*</span></label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email" name="email" />
       </div>
-      <!--Radio input-->
+
       <div class="form-group">
         <label>Gender <span class="required">*</span></label>
         <div>
-          <input type="radio" id="male" name="gender" value="Male">
+          <input type="radio" id="male" name="gender" value="Male" />
           <label for="male">Male</label>
         </div>
         <div>
-          <input type="radio" id="female" name="gender" value="Female">
+          <input type="radio" id="female" name="gender" value="Female" />
           <label for="female">Female</label>
         </div>
         <div>
-          <input type="radio" id="other" name="gender" value="Other">
+          <input type="radio" id="other" name="gender" value="Other" />
           <label for="other">Other</label>
         </div>
       </div>
-      <!--Date Input-->
+
       <div class="form-group">
         <label for="dob">Date of Birth <span class="required">*</span></label>
-        <input type="date" id="dob" name="dob">
+        <input type="date" id="dob" name="dob" />
       </div>
-      <!--select dropdown-->
+
       <div class="form-group">
         <label for="country">Country <span class="required">*</span></label>
         <select id="country" name="country">
@@ -242,41 +325,53 @@
           <option value="Australia">Australia</option>
         </select>
       </div>
-      <!--text area-->
+
       <div class="form-group">
         <label for="address">Address Information</label>
         <textarea id="address" name="address" placeholder="Enter your address"></textarea>
       </div>
+
       <button type="submit">Submit Form</button>
     </form>
   </div>
 
-
-
-
   <script>
     const form = document.getElementById("myForm");
+    const toggle = document.getElementById("darkMode");
 
-    // Utility: show error
+    // 🌗 Apply saved mode from localStorage
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+      toggle.checked = true;
+    }
+
+    // 🌙 Toggle event
+    toggle.addEventListener("change", () => {
+      if (toggle.checked) {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    });
+
+    // 🧩 Form Validation
     function showError(input, message) {
-      clearError(input); // remove old error if any
+      clearError(input);
       input.classList.add("invalid");
-
       const error = document.createElement("div");
       error.classList.add("error-msg");
       error.textContent = message;
-
       input.parentElement.appendChild(error);
     }
 
-    // Utility: clear error
     function clearError(input) {
       input.classList.remove("invalid");
       const oldError = input.parentElement.querySelector(".error-msg");
       if (oldError) oldError.remove();
     }
 
-    // Validate fields in order
     function validateForm() {
       const name = document.getElementById("name");
       const email = document.getElementById("email");
@@ -289,12 +384,10 @@
         showError(name, "Name is required");
         return false;
       }
-
       if (email.value.trim() == "") {
         showError(email, "Email is required");
         return false;
       }
-
       if (!gender) {
         const genderGroup = document.querySelector('input[name="gender"]').parentElement.parentElement;
         let oldError = genderGroup.querySelector(".error-msg");
@@ -306,12 +399,10 @@
         }
         return false;
       }
-
       if (dob.value.trim() === "") {
         showError(dob, "Date of Birth is required");
         return false;
       }
-
       if (country.value.trim() === "") {
         showError(country, "Country is required");
         return false;
@@ -323,20 +414,17 @@
         gender: gender.value,
         dob: dob.value,
         country: country.value,
-        address: address.value.trim()
+        address: address.value.trim(),
       };
     }
 
-    // On typing, remove error
-    form.querySelectorAll("input, select, textarea").forEach(input => {
+    form.querySelectorAll("input, select, textarea").forEach((input) => {
       input.addEventListener("input", () => clearError(input));
       input.addEventListener("change", () => clearError(input));
     });
 
-    // On submit
     form.addEventListener("submit", function (event) {
       event.preventDefault();
-
       const formData = validateForm();
 
       if (formData) {
@@ -353,5 +441,4 @@
     });
   </script>
 </body>
-
 </html>
